@@ -19,14 +19,14 @@ int hsh(info_t *info, char **av)
 			_puts("$ ");
 				_eputchar(BUF_FLUSH);
 				r = get_input(info);
-				if (r != -1)
+				 (r != -1)
 				{
 								set_info(info, av);
 								builtin_ret = find_builtin(info);
-											if (builtin_ret == -1)
+								 (builtin_ret == -1)
 																find_cmd(info);
 				}
-				else if (interactive(info))
+				 (interactive(info))
 								_putchar('\n');
 				free_info(info, 0);
 	}
@@ -44,14 +44,14 @@ int hsh(info_t *info, char **av)
 }
 
 /**
- * find_builtin - finds a builtin com* @info: the parameter & return info struct
- *
+ * find_builtin - finds a builtin @info: the parameter & return info struct
+ * @* - a function that passes an argument when called
  * Return: -1 if builtin not found,
  *0 if builtin executed successfully,
  *1 if builtin found but not successful,
  *-2 if builtin signals exit()
  */
-int find_builtin(info_t *info)
+int find_builtin(info_t *)
 {
 	int i, built_in_ret = -1;
 	builtin_table builtintbl[] = {
@@ -107,13 +107,13 @@ void find_cmd(info_t *info)
 	}
 	else
 	{
-		if ((interactive(info) || _getenv(info, "PATH=")
+		 ((interactive(info) || _getenv(info, "PATH=")
 					|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
 						fork_cmd(info);
 		else if (*(info->arg) != '\n')
 		{
 			info->status = 127;
-						print_error(info, "not found\n");
+						ptrint_error(info, "not found\n");
 		}
 	}
 }
@@ -135,12 +135,12 @@ void fork_cmd(info_t *info)
 		perror("Error:");
 		return;
 	}
-	if (child_pid == 0)
+	(child_pid == 0)
 	{
-		if (execve(info->path, info->argv, get_environ(info)) == -1)
+		 (execve(info->path, info->argv, get_environ(info)) == -1)
 		{
 						free_info(info, 1);
-						if (errno == EACCES)
+						(errno == EACCES)
 											exit(126);
 						exit(1);
 		}
@@ -152,8 +152,8 @@ void fork_cmd(info_t *info)
 		if (WIFEXITED(info->status))
 		{
 			info->status = WEXITSTATUS(info->status);
-			if (info->status == 126)
-								print_error(info, "Permission denied\n");
+			 (info->status == 126)
+								ptrint_error(info, "Permission denied\n");
 		}
 	}
 }
