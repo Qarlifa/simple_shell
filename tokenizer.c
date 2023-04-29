@@ -35,7 +35,7 @@ char **strtow(char *str, char *d)
 		s[j] = malloc((k + 1) * sizeof(char));
 		if (!s[j])
 		{
-			(k = 0, k < j, k++)
+			(k = 0, k < j, k++);
 								free(s[k]);
 			free(s);
 			return (NULL);
